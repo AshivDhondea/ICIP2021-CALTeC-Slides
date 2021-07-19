@@ -46,7 +46,8 @@
 %	TITLE PAGE
 %------------------
 
-\title[CALTeC for CI]{CALTeC \\ for \\ Collaborative Intelligence}
+\title[CALTeC for CI]{CALTeC : \\ Content-Adaptive Linear Tensor Completion
+\\ for \\ Collaborative Intelligence}
 \subtitle{ICIP 2021} % The short title appears at the bottom of every slide, the full title is only on the title page
 
 \author[Hans]{ Ashiv Hans Dhondea, Robert A. Cohen and Ivan V. {Bajić}}% Your name
@@ -74,7 +75,7 @@ Multimedia Lab\\School of Engineering Science\\Simon Fraser University \\ % Your
 \section{Collaborative Intelligence}
 \begin{frame}
 	\frametitle{Introduction: Collaborative Intelligence}
-
+\hl{insert a figure illustrating the principle behind collaborative intelligence.}
 \end{frame}
 
 \begin{frame}
@@ -85,5 +86,18 @@ Multimedia Lab\\School of Engineering Science\\Simon Fraser University \\ % Your
 	\end{figure}
 \end{frame}
 
+\begin{frame}
+	\frametitle{Corrupted tensor visualization}
+	\begin{figure}
+		\begin{minipage}{.48\textwidth}
+			\includegraphics[width=\linewidth]{tensorviz4.pdf}
+			\caption{Corrupted ResNet-18 deep feature tensor consisting of 64 channels. Each channel consists of 7 packets. Packets are $8 \times 56$ blocks of deep feature tensor values.}
+		\end{minipage}\hfill
+		\begin{minipage}{.48\textwidth}
+			\includegraphics[width=\linewidth]{tiledgridtensor.jpg}
+			\caption{Tiled tensor $\tilde{\mathcal{X}} \in \mathbb{R}^{56 \times 56 \times 64}$ visualization. Each tile represents a channel of shape $56 \times 56$. }
+		\end{minipage}
+	\end{figure}
+\end{frame}
 %-----------------------------------------------
 \end{document} 
