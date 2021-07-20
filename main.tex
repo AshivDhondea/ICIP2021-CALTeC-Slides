@@ -42,6 +42,12 @@
 \usepackage{listings}
 \usepackage{verbatim}
 
+\newcommand\blfootnote[1]{%
+	\begingroup
+	\renewcommand\thefootnote{}\footnote{#1}%
+	\addtocounter{footnote}{-1}%
+	\endgroup
+}
 %------------------
 %	TITLE PAGE
 %------------------
@@ -74,10 +80,28 @@ Multimedia Lab\\School of Engineering Science\\Simon Fraser University \\ % Your
 
 \section{Collaborative Intelligence}
 \begin{frame}
-	\frametitle{Introduction: Collaborative Intelligence}
-\hl{insert a figure illustrating the principle behind collaborative intelligence.}
+	\frametitle{Introduction}
+
+Insert a figure illustrating the principle behind collaborative intelligence
 \end{frame}
 
+\section{Literature review}
+\begin{frame}
+\frametitle{Related work}
+    
+\end{frame}
+
+\begin{frame}
+	\frametitle{Channel model}
+	\begin{itemize}
+	\item The Gilbert-Elliott model has been shown to fittingly capture real-time observed packet loss patterns over the Internet \blfootnote{\tiny{G. Hasslinger and O. Hohlfeld, “The gilbert-elliott model for packet loss in real time services on the internet,” in 14th GI/ITG Conference - Measurement, Modelling and Evalutation of Computer and Communication Systems, pp. 1–15, 2008.}}. \cite{5755057}.
+	\item The remote client identifies missing packets from packet sequence numbers provided by a transport-layer protocol\blfootnote{\tiny{L. Bragilevsky and I. V.Bajić, “Tensor completion methods for collaborative intelligence,” IEEE Access, vol. 8, pp. 41162–41174, 2020.}}. \cite{Bragile2020} 
+	\item Therefore, the cloud can identify which packets of a received deep feature tensor are corrupted.
+	\item A Gilbert-Elliott channel is characterized by two parameters: the loss probability $P_B$ and average burst length $L_B$.
+\end{itemize}
+\end{frame}
+
+\section{Preliminaries}
 \begin{frame}
 	\frametitle{A deep feature tensor}
 	\begin{figure}[H]
@@ -90,14 +114,58 @@ Multimedia Lab\\School of Engineering Science\\Simon Fraser University \\ % Your
 	\frametitle{Corrupted tensor visualization}
 	\begin{figure}
 		\begin{minipage}{.48\textwidth}
-			\includegraphics[width=\linewidth]{tensorviz4.pdf}
+			\includegraphics[width=0.9\linewidth]{tensorviz4.pdf}
 			\caption{Corrupted ResNet-18 deep feature tensor consisting of 64 channels. Each channel consists of 7 packets. Packets are $8 \times 56$ blocks of deep feature tensor values.}
 		\end{minipage}\hfill
 		\begin{minipage}{.48\textwidth}
-			\includegraphics[width=\linewidth]{tiledgridtensor.jpg}
+			\includegraphics[width=0.9\linewidth]{tiledgridtensor.jpg}
 			\caption{Tiled tensor $\tilde{\mathcal{X}} \in \mathbb{R}^{56 \times 56 \times 64}$ visualization. Each tile represents a channel of shape $56 \times 56$. }
 		\end{minipage}
 	\end{figure}
 \end{frame}
+
+
+
+\section{Proposed method}
+
+\section{Experiments}
+\subsection{Visual results}
+
+\begin{frame}
+    \frametitle{Visual results}
+\end{frame}
+
+
+\subsection{Monte Carlo experiments}
+
+\begin{frame}
+\frametitle{Monte Carlo experiments}
+\end{frame}
+
+\section{Conclusions}
+\begin{frame}
+	\frametitle{Conclusions and recommendations}
+	\begin{itemize}
+		\item CALTeC exploits intra- and inter-channel similarity in deep feature tensors to find the best candidates in other channels to fill the gaps in corrupted packetized deep feature tensors.
+		\item CALTeC adjusts the recovered data with an affine transformation.
+		\item CALTeC is slower than ALTeC but unlike ALTeC, it does not require pre-training.
+		\item Both ALTeC and CALTeC are much faster than SiLRTC and HaLRTC.
+		\item Future work can focus on extending DFTS to run different tasks and to incorporate different compression methods for the transmitted deep feature tensor.
+	\end{itemize}
+\end{frame}
+
+%------------------------------------------------
+\section{Implementation}
+\begin{frame}
+\frametitle{Implementation \& Results}
+Public repository for DFTS2: \url{https://github.com/AshivDhondea/DFTS_TF2}.
+
+This repository also contains the packet loss traces and Monte Carlo experiment results presented in this paper.
+	\end{frame}
+	
+%---------------------------------------------
+\section{References}
+\bibliographystyle{ieeetr}
+\bibliography{icipcaltecrefs}
 %-----------------------------------------------
 \end{document} 
