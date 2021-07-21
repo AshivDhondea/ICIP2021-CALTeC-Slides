@@ -56,15 +56,16 @@
 
 \title[CALTeC for CI]{CALTeC : Content-Adaptive Linear Tensor Completion
 \\ for \\ Collaborative Intelligence}
-\subtitle{ICIP 2021. Paper ID: 3013} % The short title appears at the bottom of every slide, the full title is only on the title page
+\subtitle{\small ICIP 2021. Paper ID: 3013} % The short title appears at the bottom of every slide, the full title is only on the title page
 
 \author[Hans]{Ashiv Dhondea, Robert A. Cohen and Ivan V. {Bajić}}% Your name
 \institute[SFU-Multimedia Lab] 
 {
+\small
 Multimedia Lab\\School of Engineering Science\\Simon Fraser University \\ % Your institution for the title page
 \smallskip
 \centering
-\includegraphics[scale=0.37]{SFUhorizontallogorgb.pdf}
+\includegraphics[scale=0.25]{SFUhorizontallogorgb.pdf}
 }
 
 \date{\today} % Date, can be changed to a custom date
@@ -183,11 +184,11 @@ p_{G\to B} & = \frac{P_B}{L_B(1-P_B)} & p_{G\to G} & = 1-p_{G\to B} \label{eq:ge
 \begin{frame}
 	\frametitle{Corrupted tensor visualization}
 	\begin{figure}
-		\begin{minipage}{.45\textwidth}
-			\includegraphics[width=0.78\linewidth]{tensorviz4.pdf}
+		\begin{minipage}{.4\textwidth}
+			\includegraphics[width=0.75\linewidth]{tensorviz4.pdf}
 			\caption{Corrupted ResNet-18 deep feature tensor consisting of 64 channels. Each channel consists of 7 packets. Packets are $8 \times 56$ blocks of deep feature tensor values.}
 		\end{minipage}\hfill
-		\begin{minipage}{.45\textwidth}
+		\begin{minipage}{.4\textwidth}
 			\includegraphics[width=0.78\linewidth]{tiledgridtensor.jpg}
 			\caption{Tiled tensor $\tilde{\mathcal{X}} \in \mathbb{R}^{56 \times 56 \times 64}$ visualization. Each tile represents a channel of shape $56 \times 56$. }
 		\end{minipage}
@@ -237,18 +238,99 @@ p_{G\to B} & = \frac{P_B}{L_B(1-P_B)} & p_{G\to G} & = 1-p_{G\to B} \label{eq:ge
 \end{frame}
 
 
+\begin{frame}
+	\frametitle{Packet 3 from candidate channel}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.56]{lumimapcaltecnicer1.pdf}
+		\caption{Illustration of CALTeC repairs on corrupted channel 0 of a deep feature tensor.}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{CALTeC-repaired tensor}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.32]{caltecdemotiled.jpg}
+		\caption{CALTeC repaired tensor}
+	\end{figure}
+\end{frame}
+
+
 \section{Experiments}
 \subsection{Visual results}
 
 \begin{frame}
-    \frametitle{Visual results}
+	\frametitle{Completed ResNet\nobreakdash-18 add\_1 tensors}
+	\begin{figure}[H]
+		\centering
+		\begin{subfigure}{.17\linewidth}
+			\centering
+			\includegraphics[width = 0.778\linewidth]{originalchannel1scaled.jpg}
+			\caption{Original}
+		\end{subfigure}%
+		\hfill
+		\begin{subfigure}{.17\textwidth}
+			\centering
+			\includegraphics[width = 0.778\textwidth]{caltecrepairedchannel1scaled.jpg}
+			\caption{CALTeC}
+		\end{subfigure}%
+        \hfill	
+		\begin{subfigure}{.17\textwidth}
+			\centering
+			\includegraphics[width=0.778\textwidth]{altecrepairedchannel1scaled.jpg}
+			\caption{ALTeC}
+		\end{subfigure}
+		
+			\begin{subfigure}{.17\textwidth}
+			\centering
+			\includegraphics[width = 0.778\textwidth]{damagedchannel1scaled.jpg}
+			\caption{Damaged channel.}
+		\end{subfigure}%
+		\hfill 
+		\begin{subfigure}{.17\textwidth}
+			\centering
+			\includegraphics[width=0.778\textwidth]{silrtc50repairedchannel1scaled.jpg}
+			\caption{SILRTC 50 iterations.}
+		\end{subfigure}%
+		\hfill
+		\begin{subfigure}{.17\textwidth}
+			\centering
+			\includegraphics[width=0.778\textwidth]{halrtc50repairedchannel1scaled.jpg}
+			\caption{HaLRTC 50 iterations.}
+		\end{subfigure}
+		\caption{Channel 1 in a damaged \textit{starfish} ResNet\nobreakdash-18 tensor. Images were mapped to grayscale and scaled up using bicubic interpolation for enhanced visualization)}
+		\label{fig:expt:repair:demo}
+	\end{figure}
 \end{frame}
 
-
 \subsection{Monte Carlo experiments}
-
 \begin{frame}
 \frametitle{Monte Carlo experiments}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.49]{add1fontsize20v2modified.pdf}
+    \caption{ResNet\nobreakdash-18 add\_1 tensor completion results. Our proposed method, CALTeC, offers the best performance.}
+    \label{fig:mcresnet18add1}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Comparison of tensor completion methods}
+    \begin{table}[b]
+\caption{Tensor completion methods used in the experiments.}
+\vspace{4pt}
+    \label{tab:methods}
+    \centering
+    \begin{tabular}{l|c|c|r|r}
+         Method & Iterative? & Pre-training? & \texttt{add\_1} & \texttt{add\_3} \\
+         \hline
+         SiLRTC~\cite{liu2012tensor}(per iter.)& Yes & No & $228.1~\mathrm{ms}$ & $122.1~\mathrm{ms}$ \\
+         HaLRTC~\cite{liu2012tensor}(per iter.) & Yes & No & $242.6~\mathrm{ms}$ & $128.2~\mathrm{ms}$ \\
+         ALTeC~\cite{Bragile2020} & No & Yes & $30.5~\mathrm{ms}$ & $102.0~\mathrm{ms}$ \\
+         CALTeC & No & No & $77.5~\mathrm{ms}$ & $186.8~\mathrm{ms}$
+    \end{tabular}
+\end{table}
 \end{frame}
 
 \section{Conclusions}
@@ -268,6 +350,11 @@ p_{G\to B} & = \frac{P_B}{L_B(1-P_B)} & p_{G\to G} & = 1-p_{G\to B} \label{eq:ge
 \begin{frame}
 \frametitle{Implementation \& Results}
 Public repository for DFTS2: \url{https://github.com/AshivDhondea/DFTS_TF2}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.35]{frame.pdf}
+\end{figure}
 
 This repository also contains the packet loss traces and Monte Carlo experiment results presented in this paper.
 	\end{frame}
