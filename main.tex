@@ -198,7 +198,7 @@ p_{G\to B} & = \frac{P_B}{L_B(1-P_B)} & p_{G\to G} & = 1-p_{G\to B} \label{eq:ge
 \section{Proposed method}
 
 \begin{frame}
-	\frametitle{Corrupted tensor visualization}
+	\frametitle{Principle behind CALTeC}
 	\begin{figure}
 		\begin{minipage}{.64\textwidth}
 			\includegraphics[width=\linewidth]{tensorvizcaltec.pdf}
@@ -215,7 +215,7 @@ p_{G\to B} & = \frac{P_B}{L_B(1-P_B)} & p_{G\to G} & = 1-p_{G\to B} \label{eq:ge
 \begin{frame}
 	\frametitle{Selecting a candidate packet}
 	\begin{block}{Locally similar candidate packet}
-		We want to find another channel $k$ in the tensor that is locally similar to channel $j$. To measure local similarity, we use the Pearson correlation coefficient.
+		We want to find another channel $k$ in the tensor that is locally similar to channel $j$. To measure local similarity, we use the Pearson correlation coefficient between the neighboring packet in-channel $\mathbf{x}_{i'}^{(j)}$ and its co-located packet out-of-channel $\mathbf{x}_{i'}^{(k)}$.
 		\[
 		 k^* = \underset{k}{\argmax} \frac{\left(\mathbf{x}_{i'}^{(j)}-\mu_{i'}^{(j)}\right)^\top \left(\mathbf{x}_{i'}^{(k)}-\mu_{i'}^{(k)}\right)}{\sigma_{i'}^{(j)}\sigma_{i'}^{(k)}},
 		\label{eq:Pearson_coefficient}
@@ -239,7 +239,7 @@ p_{G\to B} & = \frac{P_B}{L_B(1-P_B)} & p_{G\to G} & = 1-p_{G\to B} \label{eq:ge
 
 
 \begin{frame}
-	\frametitle{Packet 3 from candidate channel}
+	\frametitle{Example on recovering missing packet 3}
 	\begin{figure}[H]
 		\centering
 		\includegraphics[scale=0.56]{lumimapcaltecnicer1.pdf}
@@ -318,7 +318,7 @@ p_{G\to B} & = \frac{P_B}{L_B(1-P_B)} & p_{G\to G} & = 1-p_{G\to B} \label{eq:ge
 \begin{frame}
     \frametitle{Comparison of tensor completion methods}
     \begin{table}[b]
-\caption{Tensor completion methods used in the experiments.}
+\caption{Tensor completion methods used in our experiments on ResNet\nobreakdash-18 tensors.}
 \vspace{4pt}
     \label{tab:methods}
     \centering
@@ -337,7 +337,7 @@ p_{G\to B} & = \frac{P_B}{L_B(1-P_B)} & p_{G\to G} & = 1-p_{G\to B} \label{eq:ge
 \begin{frame}
 	\frametitle{Conclusions and recommendations}
 	\begin{itemize}
-		\item CALTeC exploits intra- and inter-channel similarity in deep feature tensors to find the best candidates in other channels to fill the gaps in corrupted packetized deep feature tensors.
+		\item CALTeC exploits intra- and inter-channel similarity in deep feature tensors to find the best candidates in other channels to fill in the gaps in corrupted packetized deep feature tensors.
 		\item CALTeC adjusts the recovered data with an affine transformation.
 		\item CALTeC is slower than ALTeC but unlike ALTeC, it does not require pre-training.
 		\item Both ALTeC and CALTeC are much faster than SiLRTC and HaLRTC.
